@@ -24,7 +24,8 @@ spec:
             value: Asia/Taipei
           - name: GPT_API_KEY
             value: ${GPT_API_KEY}
-          
+          - name: GPT_API_ENDPOINT_KEY
+            value: ${GPT_API_ENDPOINT_KEY}
 ---
 apiVersion: v1
 kind: Service

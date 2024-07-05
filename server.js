@@ -26,6 +26,12 @@ app.post('/gpt',  (req, res) => {
         });
         return;
     }
+    if (!req.body || req.body.key != process.env.GPT_API_ENDPOINT_KEY) {
+        res.send({
+            answer: 'Invalid key!'
+        });
+        return;
+    }
     axios.post('https://api.openai.com/v1/chat/completions',
         {
             "model": "gpt-4",
