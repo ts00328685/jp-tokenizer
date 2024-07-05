@@ -22,6 +22,8 @@ spec:
         env:
           - name: TZ
             value: Asia/Taipei
+          - name: GPT_API_KEY
+            value: ${GPT_API_KEY}
           
 ---
 apiVersion: v1
