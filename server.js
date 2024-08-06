@@ -64,14 +64,17 @@ app.post('/gpt-custom',  (req, res) => {
         return;
     }
     axios.post('https://api.openai.com/v1/chat/completions',
-        req,
+        req.body,
         {
             headers: {
                 'Authorization': req.header('Authorization'),
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            res.send(response);
+            for (const header of response.headers) {
+                res.setHeader(header[0], header[1]);
+            }
+            res.send(response.data);
         }).catch((error) => {
             res.send(error);
         });
