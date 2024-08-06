@@ -56,6 +56,26 @@ app.post('/gpt',  (req, res) => {
     });
 });
 
+app.post('/gpt-custom',  (req, res) => {
+    if (!req.body || !req.header('Authorization')) {
+        res.send({
+            answer: 'Invalid request!'
+        });
+        return;
+    }
+    axios.post('https://api.openai.com/v1/chat/completions',
+        req,
+        {
+            headers: {
+                'Authorization': req.header('Authorization'),
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            res.send(response);
+        }).catch((error) => {
+            res.send(error);
+        });
+});
 
 app.listen(80, () => {
     console.log('Tokenizer app is listening on port 3000.')
