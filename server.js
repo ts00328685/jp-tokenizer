@@ -18,7 +18,6 @@ app.post('/tokenizer', (req, res) => {
     });
 });
 
-
 app.post('/gpt-custom/completions', (req, res) => {
     if (!req.body || !req.header('Authorization')) {
         res.send({
