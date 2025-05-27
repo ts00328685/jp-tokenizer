@@ -25,7 +25,7 @@ app.post('/gpt-custom/completions', (req, res) => {
         });
         return;
     }
-    axios.post('https://api.openai.com/v1/chat/completions',
+    axios.post('https://api.openai.com/v1/completions',
         req.body,
         {
             headers: {
