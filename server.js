@@ -26,6 +26,7 @@ app.post('/gpt-custom/completions', (req, res) => {
         });
         return;
     }
+    console.log('request', req);
     axios.post('https://api.openai.com/v1/completions',
         req.body,
         {
@@ -38,8 +39,10 @@ app.post('/gpt-custom/completions', (req, res) => {
                 res.setHeader(header[0], header[1]);
             }
             res.send(response.data);
+            console.log('response', response);
         }).catch((error) => {
             res.send(error);
+            console.log('error', error);
         });
 });
 
