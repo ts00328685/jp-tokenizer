@@ -46,6 +46,31 @@ app.post('/gpt-custom/completions', (req, res) => {
         });
 });
 
+app.post('/gpt-custom/chat/completions', (req, res) => {
+    if (!req.body || !req.header('Authorization')) {
+        res.send({
+            answer: 'Invalid request!'
+        });
+        return;
+    }
+    axios.post('https://api.openai.com/v1/chat/completions',
+        req.body,
+        {
+            headers: {
+                'Authorization': req.header('Authorization'),
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            for (const header of response.headers) {
+                res.setHeader(header[0], header[1]);
+            }
+            res.send(response.data);
+        }).catch((error) => {
+            res.send(error);
+            console.log('error', error);
+        });
+});
+
 app.post('/gpt', (req, res) => {
     console.log(req.body);
     if (!req.body || !req.body.query) {
